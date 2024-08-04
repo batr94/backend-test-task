@@ -18,7 +18,7 @@ final class MainController extends AbstractController
 {
     #[Route('/calculate-price', name: 'app_calculate_price', methods: ['POST'])]
     public function calculatePrice(
-        #[MapRequestPayload]
+        #[MapRequestPayload(validationFailedStatusCode: Response::HTTP_BAD_REQUEST)]
         CalculatePriceDTO $calculatePriceRequestDTO,
         CalculateProductPriceService $calculateProductPriceService
     ): Response {
@@ -27,18 +27,12 @@ final class MainController extends AbstractController
 
     #[Route('/purchase', name: 'app_purchase', methods: ['POST'])]
     public function purchase(
-        #[MapRequestPayload]
+        #[MapRequestPayload(validationFailedStatusCode: Response::HTTP_BAD_REQUEST)]
         PurchaseRequestDTO $purchaseRequestDTO,
         PurchaseService $purchaseService
     ): Response {
-        try {
-            $purchaseService->purchase($purchaseRequestDTO);
+        $purchaseService->purchase($purchaseRequestDTO);
 
-            return new Response('');
-        } catch (EntityNotFoundException $exception) {
-            return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
-        } catch (\Throwable $exception) {
-            return new Response($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        return new Response('');
     }
 }
