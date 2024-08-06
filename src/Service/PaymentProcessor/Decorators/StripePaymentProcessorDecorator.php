@@ -16,9 +16,9 @@ final readonly class StripePaymentProcessorDecorator implements PaymentProcessor
     ) {
     }
 
-    public function getServiceName(): PaymentServiceEnum
+    public function getServiceName(): string
     {
-        return PaymentServiceEnum::Stripe;
+        return PaymentServiceEnum::Stripe->value;
     }
 
     public function pay(float $amount): void

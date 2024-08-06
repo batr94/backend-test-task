@@ -9,7 +9,7 @@ use App\Exception\PaymentException;
 
 interface PaymentProcessorDecoratorInterface
 {
-    public function getServiceName(): PaymentServiceEnum;
+    public function getServiceName(): string;
 
     /**
      * @throws PaymentException

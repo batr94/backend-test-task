@@ -16,9 +16,9 @@ final readonly class PaypalPaymentProcessDecorator implements PaymentProcessorDe
     ) {
     }
 
-    public function getServiceName(): PaymentServiceEnum
+    public function getServiceName(): string
     {
-        return PaymentServiceEnum::Paypal;
+        return PaymentServiceEnum::Paypal->value;
     }
 
     public function pay(float $amount): void

@@ -20,10 +20,10 @@ final readonly class PaymentProcessorProvider
     /**
      * @throws PaymentProcessorNotFoundException
      */
-    public function get(PaymentServiceEnum $serviceName): PaymentProcessorDecoratorInterface
+    public function get(string $serviceName): PaymentProcessorDecoratorInterface
     {
         foreach ($this->paymentProcessors as $processor) {
-            if ($processor->getServiceName() === $serviceName) {
+            if ($serviceName === $processor->getServiceName()) {
                 return $processor;
             }
         }
