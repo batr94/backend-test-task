@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\CountryTax;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityNotFoundException;
+use App\Exception\CountryTaxNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class CountryTaxRepository extends ServiceEntityRepository
@@ -19,7 +19,7 @@ class CountryTaxRepository extends ServiceEntityRepository
         $countryTax = $this->findOneBy(['serialNumberPattern' => $pattern]);
 
         if ($countryTax === null) {
-            throw new EntityNotFoundException();
+            throw new CountryTaxNotFoundException();
         }
 
         return $countryTax;

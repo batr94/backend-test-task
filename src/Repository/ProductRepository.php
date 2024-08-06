@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityNotFoundException;
+use App\Exception\ProductNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProductRepository extends ServiceEntityRepository
@@ -19,7 +19,7 @@ class ProductRepository extends ServiceEntityRepository
         $product = $this->find($id);
 
         if ($product === null) {
-            throw new EntityNotFoundException();
+            throw new ProductNotFoundException($id);
         }
 
         return $product;

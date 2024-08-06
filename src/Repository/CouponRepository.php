@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Coupon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityNotFoundException;
+use App\Exception\CouponNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class CouponRepository extends ServiceEntityRepository
@@ -19,7 +19,7 @@ class CouponRepository extends ServiceEntityRepository
         $coupon = $this->findOneBy(['name' => $name]);
 
         if ($coupon === null) {
-            throw new EntityNotFoundException();
+            throw new CouponNotFoundException($name);
         }
 
         return $coupon;
