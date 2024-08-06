@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 #[AsEventListener]
-final class RequestExceptionListener
+final class ValidationExceptionListener
 {
     public function __invoke(ExceptionEvent $event): void
     {

@@ -26,3 +26,9 @@ services:
     _instanceof:
         App\Service\PaymentProcessor\PaymentProcessorDecoratorInterface:
             tags: ['app.payment_processor']
+
+    Systemeio\TestForCandidates\PaymentProcessor\PaypalPaymentProcessor:
+        autowire: true
+
+    Systemeio\TestForCandidates\PaymentProcessor\StripePaymentProcessor:
+        autowire: true

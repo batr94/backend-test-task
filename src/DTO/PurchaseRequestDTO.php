@@ -5,19 +5,27 @@ declare(strict_types=1);
 namespace App\DTO;
 
 use App\Const\PaymentServiceEnum;
+use App\Validator\TaxNumber;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class PurchaseRequestDTO
 {
     public function __construct(
-        #[Assert\Type('integer'), Assert\NotNull]
+        #[Assert\NotBlank]
+        #[Assert\Type('integer')]
         public ?int $product,
-        #[Assert\Type('string'), Assert\NotNull]
+
+        #[Assert\NotBlank]
+        #[Assert\Type('string')]
+        #[TaxNumber]
         public ?string $taxNumber,
+
         #[Assert\Type('string')]
         public ?string $couponCode,
-        #[Assert\Type(type: PaymentServiceEnum::class)]
-        public ?PaymentServiceEnum $paymentProcessor
+
+        #[Assert\NotBlank]
+        #[Assert\Type('string')]
+        public ?string $paymentProcessor
     ) {
     }
 }

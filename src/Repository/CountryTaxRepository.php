@@ -14,9 +14,14 @@ class CountryTaxRepository extends ServiceEntityRepository
         parent::__construct($registry, CountryTax::class);
     }
 
+    public function findOneByPattern(string $pattern): ?CountryTax
+    {
+        return $this->findOneBy(['serialNumberPattern' => $pattern]);
+    }
+
     public function getOneByPattern(string $pattern): CountryTax
     {
-        $countryTax = $this->findOneBy(['serialNumberPattern' => $pattern]);
+        $countryTax = $this->findOneByPattern($pattern);
 
         if ($countryTax === null) {
             throw new CountryTaxNotFoundException();
