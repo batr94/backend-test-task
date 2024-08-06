@@ -20,10 +20,10 @@ final readonly class CouponPriceCalculationCommand implements PriceCalculationCo
 
     private function getCouponValue(float $price): float
     {
-        if ($this->coupon->getType() === CouponTypeEnum::Fixed) {
-            return $price - $this->coupon->getValue();
+        if (CouponTypeEnum::tryFrom($this->coupon->getType()) === CouponTypeEnum::Fixed) {
+            return $this->coupon->getValue();
         }
 
-        return $price * $this->coupon ->getValue() / 100;
+        return $price * $this->coupon->getValue() / 100;
     }
 }
