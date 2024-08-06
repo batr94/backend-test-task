@@ -28,6 +28,6 @@ final readonly class PaymentProcessorProvider
             }
         }
 
-        throw new PaymentProcessorNotFoundException();
+        throw new PaymentProcessorNotFoundException($serviceName);
     }
 }
