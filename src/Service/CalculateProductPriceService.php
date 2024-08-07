@@ -21,6 +21,11 @@ final readonly class CalculateProductPriceService
     ) {
     }
 
+    /**
+     * @throws \App\Exception\CountryTaxNotFoundException
+     * @throws \App\Exception\CouponNotFoundException
+     * @throws \App\Exception\ProductNotFoundException
+     */
     public function calculate(CalculatePriceDTO $calculatePriceDTO): float
     {
         $product = $this->productRepository->getProduct($calculatePriceDTO->product);

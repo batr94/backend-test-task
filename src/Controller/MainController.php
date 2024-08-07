@@ -8,7 +8,6 @@ use App\DTO\CalculatePriceDTO;
 use App\DTO\PurchaseRequestDTO;
 use App\Service\CalculateProductPriceService;
 use App\Service\PurchaseService;
-use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +21,7 @@ final class MainController extends AbstractController
         CalculatePriceDTO $calculatePriceRequestDTO,
         CalculateProductPriceService $calculateProductPriceService
     ): Response {
-        return new Response((string) $calculateProductPriceService->calculate($calculatePriceRequestDTO));
+        return $this->json($calculateProductPriceService->calculate($calculatePriceRequestDTO));
     }
 
     #[Route('/purchase', name: 'app_purchase', methods: ['POST'])]
@@ -33,6 +32,6 @@ final class MainController extends AbstractController
     ): Response {
         $purchaseService->purchase($purchaseRequestDTO);
 
-        return new Response('');
+        return new Response();
     }
 }
