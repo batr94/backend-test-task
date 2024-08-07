@@ -14,9 +14,14 @@ class CouponRepository extends ServiceEntityRepository
         parent::__construct($registry, Coupon::class);
     }
 
+    public function findOneByName(string $name): ?Coupon
+    {
+        return $this->findOneBy(['name' => $name]);
+    }
+
     public function getByName(string $name): Coupon
     {
-        $coupon = $this->findOneBy(['name' => $name]);
+        $coupon = $this->findOneByName($name);
 
         if ($coupon === null) {
             throw new CouponNotFoundException($name);

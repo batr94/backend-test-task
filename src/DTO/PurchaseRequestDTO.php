@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-use App\Const\PaymentServiceEnum;
 use App\Validator\TaxNumber;
+use App\Validator\CouponCode;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class PurchaseRequestDTO
@@ -21,6 +21,7 @@ final readonly class PurchaseRequestDTO
         public ?string $taxNumber,
 
         #[Assert\Type('string')]
+        #[CouponCode]
         public ?string $couponCode,
 
         #[Assert\NotBlank]

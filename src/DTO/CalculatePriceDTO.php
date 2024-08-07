@@ -6,6 +6,7 @@ namespace App\DTO;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\TaxNumber;
+use App\Validator\CouponCode;
 
 final readonly class CalculatePriceDTO
 {
@@ -20,6 +21,7 @@ final readonly class CalculatePriceDTO
         public ?string $taxNumber,
 
         #[Assert\Type('string')]
+        #[CouponCode]
         public ?string $couponCode
     ) {
     }
