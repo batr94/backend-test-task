@@ -10,6 +10,6 @@ final class ProductNotFoundException extends NotFoundException
 {
     public function __construct(string $name)
     {
-        parent::__construct(sprintf('Payment service "%s" could not be found', $name));
+        parent::__construct(sprintf('Product "%s" could not be found', $name));
     }
 }
