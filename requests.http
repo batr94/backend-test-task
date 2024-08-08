@@ -1,4 +1,4 @@
-### Calculate Price
+### Расчёт цены с фиксированным купоном
 POST http://127.0.0.1:8337/calculate-price
 Accept: application/json
 Content-Type: application/json
@@ -6,10 +6,41 @@ Content-Type: application/json
 {
   "product": 1,
   "taxNumber": "DE123456789",
-  "couponCode": "D15"
+  "couponCode": "F50"
 }
 
-### Execute Purchase
+### Расчёт цены с купоном на процент и комиссией Италии
+POST http://127.0.0.1:8337/calculate-price
+Accept: application/json
+Content-Type: application/json
+
+{
+"product": 1,
+"taxNumber": "IT12345678912",
+"couponCode": "P10"
+}
+
+### Расчёт цены без купона и комиссией Италии
+POST http://127.0.0.1:8337/calculate-price
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product": 1,
+  "taxNumber": "IT12345678912"
+}
+
+### Передача неправильного серийного номера комиссии
+POST http://127.0.0.1:8337/calculate-price
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product": 1,
+  "taxNumber": "IT1212"
+}
+
+### Покупка товара
 POST http://127.0.0.1:8337/purchase
 Accept: application/json
 Content-Type: application/json
@@ -17,6 +48,29 @@ Content-Type: application/json
 {
   "product": 1,
   "taxNumber": "IT12345678900",
-  "couponCode": "D15",
+  "couponCode": "F50",
+  "paymentProcessor": "paypal"
+}
+
+### Покупка товара через другой сервис без купона
+POST http://127.0.0.1:8337/purchase
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product": 1,
+  "taxNumber": "IT12345678900",
+  "paymentProcessor": "stripe"
+}
+
+### Покупка товара с неправильными данными
+POST http://127.0.0.1:8337/purchase
+Accept: application/json
+Content-Type: application/json
+
+{
+  "product": 1,
+  "taxNumber": "1234",
+  "couponCode": "F80",
   "paymentProcessor": "paypal"
 }
